@@ -1,5 +1,7 @@
 package bot;
 
+import java.io.FileNotFoundException;
+
 import org.json.JSONObject;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -22,12 +24,12 @@ public class ChatBot extends TelegramLongPollingBot {
 		return "ChatBot";
 	}
 
-	public ChatBot() {
-		String url = Config.getPathSemanticNet();
-		float threshold = 0.7f;
+	public ChatBot(String configPath) throws FileNotFoundException {
+		Config conf = Config.getInstance(configPath);
+		String url = conf.getPathSemanticNet();
+		float threshold = 0.9f;
 		SemanticNet net = new SemanticNet(url);
 		JSONObject read = Reader.readNLU(net.getModel());
-		Config conf = Config.getInstance();
 		dm = new DialogManager(net, threshold, read, conf);
 	}
 
