@@ -1,0 +1,154 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://project.contabile#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://project.contabile#input/example">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#default">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/mod">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/number"/>
+    <j.0:template rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mod</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">70</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://project.contabile#class/domain"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://project.contabile#class/dialog"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/noAnswer">
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noAnswer</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">-1</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/property">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/mod"/>
+    <j.0:template rdf:nodeID="A2"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">property</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">80</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <rdf:rest rdf:nodeID="A4"/>
+    <rdf:first rdf:resource="http://project.contabile#class/mod"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/action">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/domain"/>
+    <j.0:template rdf:nodeID="A0"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">action</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">100</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#classRelation">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#output/message_singular">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A5">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://project.contabile#class/unit"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#oneToOne">
+    <j.0:maxCardinality>1</j.0:maxCardinality>
+    <j.0:minCardinality>1</j.0:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#oneToMany">
+    <j.0:maxCardinality>N</j.0:maxCardinality>
+    <j.0:minCardinality>0</j.0:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/domain">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/property"/>
+    <j.0:template rdf:nodeID="A6"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">domain</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">90</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/unit">
+    <j.0:template rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unit</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">60</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#oneToStart">
+    <j.0:maxCardinality>1</j.0:maxCardinality>
+    <j.0:minCardinality>0</j.0:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#planLink">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/speechAct">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/action"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">speechAct</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/plan">
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">plan</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#template">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#output/message_plural">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A6">
+    <rdf:rest rdf:nodeID="A1"/>
+    <rdf:first rdf:resource="http://project.contabile#class/property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#output/message_not">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/dialog">
+    <j.0:template rdf:nodeID="A7"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dialog</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">20</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/number">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/value"/>
+    <j.0:template rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">50</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A4">
+    <rdf:rest rdf:nodeID="A5"/>
+    <rdf:first rdf:resource="http://project.contabile#class/number"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+    <rdf:rest rdf:nodeID="A3"/>
+    <rdf:first rdf:resource="http://project.contabile#class/value"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#class/value">
+    <j.0:classRelation rdf:resource="http://project.contabile#class/unit"/>
+    <j.0:template rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">value</j.0:name>
+    <j.0:salience rdf:datatype="http://www.w3.org/2001/XMLSchema#long">40</j.0:salience>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://project.contabile#speechAct">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A7">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://project.contabile#class/domain"/>
+  </rdf:Description>
+</rdf:RDF>
