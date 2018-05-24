@@ -1,6 +1,7 @@
 package bot;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.json.JSONObject;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -15,22 +16,35 @@ import knowledge.SemanticNet;
 
 public class ChatBot extends TelegramLongPollingBot {
 
-	private String error = "Ops... Riprova c'è stato un problema";
-	private String welcome = "Ciao, mantenere il bilancio familiare sempre aggiornato? ci penso io :)";
+	private final String error = "Ops... Riprova c'è stato un problema";
+	private final String welcome = "Ciao, mantenere il bilancio familiare sempre aggiornato? ci penso io :)";
+	private final String resetMessage = "Ho resettato il sistema.";
+	private final String help = "cosa puoi fare?";
+	private final String history = "storico";
+	private final String add="ho avuto";
+	private final String spent="ho speso";
+		
+	private String configPath;
 
-	private final DialogManager dm;
+	private DialogManager dm;
 
 	public String getBotUsername() {
 		return "ChatBot";
 	}
 
 	public ChatBot(String configPath) throws FileNotFoundException {
+		this.configPath=configPath;
+		resetDm();
+	}
+
+	private void resetDm() throws FileNotFoundException {
 		Config conf = Config.getInstance(configPath);
 		String url = conf.getPathSemanticNet();
 		float threshold = 0.9f;
 		SemanticNet net = new SemanticNet(url);
 		JSONObject read = Reader.readNLU(net.getModel());
 		dm = new DialogManager(net, threshold, read, conf);
+		
 	}
 
 	public void onUpdateReceived(Update update) {
@@ -43,7 +57,45 @@ public class ChatBot extends TelegramLongPollingBot {
 			System.out.println(" da: " + user_id);
 			if (message_text.equals("/start")) {
 				sendMessage(chat_id, welcome);
-			} else {
+			} else if(message_text.equals("/reset")){
+				try {
+					dm.setWorkingMemory(new JSONObject());
+					dm.writeMemory();
+					resetDm();
+					sendMessage(chat_id, resetMessage);
+					sendMessage(chat_id, welcome);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(message_text.equals("/help")){
+				synchronized (dm) {
+					dm.setUser(user_id.toString());
+					dm.streamMessage(help).stream().filter(s -> !s.isEmpty())
+							.forEach(s -> sendMessage(chat_id, s));
+				}
+			} else if(message_text.equals("/history")){
+				synchronized (dm) {
+					dm.setUser(user_id.toString());
+					dm.streamMessage(history).stream().filter(s -> !s.isEmpty())
+							.forEach(s -> sendMessage(chat_id, s));
+				}
+			} else if(message_text.contains("/add")){
+				message_text=message_text.replaceAll("/add", add);
+				synchronized (dm) {
+					dm.setUser(user_id.toString());
+					dm.streamMessage(message_text).stream().filter(s -> !s.isEmpty())
+							.forEach(s -> sendMessage(chat_id, s));
+				}
+			} else if(message_text.contains("/spent")){
+				message_text=message_text.replaceAll("spent", spent);
+				synchronized (dm) {
+					dm.setUser(user_id.toString());
+					dm.streamMessage(message_text).stream().filter(s -> !s.isEmpty())
+							.forEach(s -> sendMessage(chat_id, s));
+				}
+			}else {
 				synchronized (dm) {
 					dm.setUser(user_id.toString());
 					dm.streamMessage(message_text).stream().filter(s -> !s.isEmpty())
