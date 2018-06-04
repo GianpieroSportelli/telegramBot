@@ -120,7 +120,13 @@ public class BrokerBot extends TelegramLongPollingBot {
 						sendMessage(chat_id, error);
 					} 
 				}else {
-					sendMessage(chat_id, "sei ancora in attesa...");
+					if(users.contains(chat_id)) {
+						sendMessage(chat_id, "sei ancora in attesa di un bot");
+					}else if(bots.contains(chat_id)) {
+						sendMessage(chat_id, "sei ancora in attesa di uno user");
+					}else {
+						sendMessage(chat_id, "devi ancora registrarti");
+					}
 				}
 			}
 		}
