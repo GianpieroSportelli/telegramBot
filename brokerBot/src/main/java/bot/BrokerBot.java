@@ -48,10 +48,10 @@ public class BrokerBot extends TelegramLongPollingBot {
 			String name = update.getMessage().getFrom().getFirstName();
 			
 			if(!nameChat.containsKey(chat_id)) {
-				nameChat.put(chat_id, name);
+				nameChat.put(chat_id, name+user_id);
 			}
 			
-			System.out.println(" da: " + user_id);
+			System.out.println(" da: " +name+"-"+ user_id);
 			if (message_text.equals("/start")) {
 				sendMessage(chat_id, welcome);
 			}else if (message_text.equals("/help")) {
@@ -115,7 +115,7 @@ public class BrokerBot extends TelegramLongPollingBot {
 					Long user=map.inverse().get(chat_id);
 					sendMessage(user, message_text);
 					try {
-						writeMessage(user,chat_id, "BOT >> "+message_text);
+						writeMessage(user,chat_id, "BOT  >> "+message_text);
 					} catch (IOException e) {
 						sendMessage(chat_id, error);
 					} 
