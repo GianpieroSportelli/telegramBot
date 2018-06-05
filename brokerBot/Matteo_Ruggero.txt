@@ -1,4 +1,0 @@
-USER >> Ciai
-BOT >> Ciao
-BOT >> Hola
-USER >> Cfgcdfff

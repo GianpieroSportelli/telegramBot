@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -56,49 +57,26 @@ public class BrokerBot extends TelegramLongPollingBot {
 				sendMessage(chat_id, welcome);
 			}else if (message_text.equals("/help")) {
 				sendMessage(chat_id, help);
-			}else if(message_text.equals("/user")) {
+			}else if(message_text.equals("/join")) {
 				String message;
-				if(users.contains(chat_id)) {
-					message="sei già in attesa di un bot";
-				}else if(map.containsKey(chat_id)){
-					message="sei già in contatto come user";
-				}else if(map.containsValue(chat_id)) {
-					message="sei già in contatto come bot";
-				}else if(bots.contains(chat_id)) {
-					message="ti sei già registrato come bot";
+				if(users.size()>0) {
+					Long user = users.iterator().next();
+					users.remove(user);
+					map.put(user, chat_id);
+					message="sei stato registrato come <b>bot</b>. Il tuo <b>user</b> è già disponibile preparati a rispondere :)";
+				}else if(bots.size()>0) {
+					Long bot = bots.iterator().next();
+					bots.remove(bot);
+					map.put(chat_id,bot);
+					message="sei stato registrato come <b>user</b>. Il tuo <b>bot</b> è già disponibile puoi scrivere il primo messaggio";
 				}else {
-					if(!bots.isEmpty()) {
-						Long botId=bots.iterator().next();
-						bots.remove(botId);
-						map.put(chat_id, botId);
-						message="sei in contatto con un bot";
-						sendMessage(botId, "sei connesso.");
-					}else {
+					Random r=new Random();
+					if(r.nextBoolean()) {
 						users.add(chat_id);
-						message="sei in attesa di un bot";
-					}
-				}
-				sendMessage(chat_id, message);
-			}else if(message_text.equals("/bot")) {
-				String message;
-				if(bots.contains(chat_id)) {
-					message="sei già in attesa di uno user";
-				}else if(map.containsKey(chat_id)){
-					message="sei già in contatto come user";
-				}else if(map.containsValue(chat_id)) {
-					message="sei già in contatto come bot";
-				}else if(users.contains(chat_id)) {
-					message="ti sei già registrato come user";
-				}else {
-					if(!users.isEmpty()) {
-						Long userId=users.iterator().next();
-						bots.remove(userId);
-						map.put(userId,chat_id);
-						message="sei in contatto con uno user";
-						sendMessage(userId, "sei connesso.");
+						message="sei stato registrato come <b>user</b>. Dovrai simulare un utente non appena un <b>bot</b> sarà disponibile";
 					}else {
 						bots.add(chat_id);
-						message="sei in attesa di uno user";
+						message="sei stato registrato come <b>bot</b>. Dovrai simulare l'agente conversazionale non appena uno <b>user</b> sarà disponibile";
 					}
 				}
 				sendMessage(chat_id, message);
