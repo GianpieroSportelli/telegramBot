@@ -20,7 +20,7 @@ import com.google.common.collect.HashBiMap;
 public class BrokerBot extends TelegramLongPollingBot {
 	private final String help = "hai bisogno di aiuto? chiedi a @GianpSport";
 	private final String error = "Ops... Riprova c'è stato un problema nel salvataggio della conversazione chiedi a @GianpSport";
-	private final String welcome = "Ciao, sono un broker bot, metto in contatto due utenti per costruire gli script delle conversazioni.";
+	private final String welcome = "Ciao, sono un broker bot, metto in contatto due <b>telegram user</b> per costruire gli script delle conversazioni utili infase di costruzione di un chatbot. /join per registrarsi";
 	
 	private final Set<Long> users= new HashSet<>();
 	private final Set<Long> bots= new HashSet<>();
@@ -59,16 +59,24 @@ public class BrokerBot extends TelegramLongPollingBot {
 				sendMessage(chat_id, help);
 			}else if(message_text.equals("/join")) {
 				String message;
-				if(users.size()>0) {
+				if(users.contains(chat_id) || bots.contains(chat_id)) {
+					message = "ti sei già registrato";
+				}else if(map.containsKey(chat_id)) {
+					message = "ti sei già in contatto con un <b>bot</b>";
+				}else if(map.inverse().containsKey(chat_id)) {
+					message = "ti sei già in contatto con uno <b>user</b>";
+				}else if(users.size()>0) {
 					Long user = users.iterator().next();
 					users.remove(user);
 					map.put(user, chat_id);
 					message="sei stato registrato come <b>bot</b>. Il tuo <b>user</b> è già disponibile preparati a rispondere :)";
+					sendMessage(user, "sei connesso a un bot, può iniziare la conversazione");
 				}else if(bots.size()>0) {
 					Long bot = bots.iterator().next();
 					bots.remove(bot);
 					map.put(chat_id,bot);
 					message="sei stato registrato come <b>user</b>. Il tuo <b>bot</b> è già disponibile puoi scrivere il primo messaggio";
+					sendMessage(bot, "sei connesso a uno user, può iniziare la conversazione");
 				}else {
 					Random r=new Random();
 					if(r.nextBoolean()) {
@@ -99,9 +107,9 @@ public class BrokerBot extends TelegramLongPollingBot {
 					} 
 				}else {
 					if(users.contains(chat_id)) {
-						sendMessage(chat_id, "sei ancora in attesa di un bot");
+						sendMessage(chat_id, "sei ancora in attesa di un <b>bot</b>");
 					}else if(bots.contains(chat_id)) {
-						sendMessage(chat_id, "sei ancora in attesa di uno user");
+						sendMessage(chat_id, "sei ancora in attesa di uno <b>user</b>");
 					}else {
 						sendMessage(chat_id, "devi ancora registrarti");
 					}
