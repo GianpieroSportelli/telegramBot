@@ -1,0 +1,8 @@
+USER >> Ciao
+BOT  >> SONO_UN_BOT
+USER >> Perfetto😁😁
+USER >> Dovrebbe esserti arrivato un messaggio con gli smile
+BOT  >> Sí
+BOT  >> Ovicu Ds tatdjvkkgigkvpk phjcysysi
+USER >> Grazie matteo
+BOT  >> 😉

@@ -53,7 +53,33 @@ public class BrokerBot extends TelegramLongPollingBot {
 			}
 			
 			System.out.println(" da: " +name+"-"+ user_id);
-			if (message_text.equals("/start")) {
+			if(message_text.equals("/remove")) {
+				String message;
+				
+				if(users.contains(chat_id)) {
+					users.remove(chat_id);
+					message="sei stato eliminato dalla lista degli <b>user</b> in attesa";
+				}else if(bots.contains(chat_id)) {
+					bots.remove(chat_id);
+					message="sei stato eliminato dalla lista dei <b>bot</b> in attesa";
+				}else if(map.containsKey(chat_id)) {
+					Long bot=map.get(chat_id);
+					bots.add(bot);
+					map.remove(chat_id);
+					message="la tua conversazione come <b>user</b> è terminata";
+					sendMessage(bot, "il tuo <b>user</b> si è disconnesso, attendi il prossimo o /remove");
+				}else if(map.inverse().containsKey(chat_id)) {
+					Long user=map.inverse().get(chat_id);
+					users.add(user);
+					map.inverse().remove(chat_id);
+					message="la tua conversazione come <b>bot</b> è terminata";
+					sendMessage(user, "il tuo <b>bot</b> si è disconnesso, attendi il prossimo o /remove");
+				}else {
+					message="devi ancora registrarti";
+				}
+				
+				sendMessage(chat_id, message);
+			}else if (message_text.equals("/start")) {
 				sendMessage(chat_id, welcome);
 			}else if (message_text.equals("/help")) {
 				sendMessage(chat_id, help);
